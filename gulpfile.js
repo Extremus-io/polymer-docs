@@ -109,7 +109,13 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox)
+  var scripts = gulp.src(['app/scripts/*','!app/scripts/*.js'])
+    .pipe(gulp.dest('dist/scripts'));
+
+  var uScripts = gulp.src(['app/scripts/**/*.js'])
+    .pipe(gulp.dest('dist/scripts'));
+
+  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox, scripts, uScripts)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -154,7 +160,8 @@ gulp.task('vulcanize', function () {
     .pipe($.vulcanize({
       stripComments: true,
       inlineCss: true,
-      inlineScripts: true
+      inlineScripts: true,
+      excludes:['dist/elements/body-element/']
     }))
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: 'vulcanize'}));
