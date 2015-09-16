@@ -20,6 +20,7 @@ var merge = require('merge-stream');
 var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
+var markdown = require('gulp-markdown');
 var historyApiFallback = require('connect-history-api-fallback');
 
 var AUTOPREFIXER_BROWSERS = [
@@ -61,6 +62,7 @@ gulp.task('jshint', function () {
       'app/scripts/**/*.js',
       'app/elements/**/*.js',
       'app/elements/**/*.html'
+      //'!app/**/highlight.pack.js'
     ])
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint.extract()) // Extract JS from .html files
@@ -94,7 +96,7 @@ gulp.task('copy', function () {
     'bower_components/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
-  var elements = gulp.src(['app/elements/**/*.html'])
+  var elements = gulp.src(['app/elements/**/*.{html,js}'])
     .pipe(gulp.dest('dist/elements'));
 
   var swBootstrap = gulp.src(['bower_components/platinum-sw/bootstrap/*.js'])
@@ -122,7 +124,7 @@ gulp.task('fonts', function () {
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
 
-  return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
+  return gulp.src(['app/**/*.html', '!app/{elements,test,docs}/**/*.html'])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
@@ -177,8 +179,15 @@ gulp.task('precache', function (callback) {
 // Clean Output Directory
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
+//Compile all markdowns (documents)
+gulp.task('markdown', function(){
+  return gulp.src('app/docs/**/*.md')
+    .pipe(markdown())
+    .pipe(gulp.dest('dist/docs/')).pipe(gulp.dest('.tmp/docs'));
+});
+
 // Watch Files For Changes & Reload
-gulp.task('serve', ['styles', 'elements', 'images'], function () {
+gulp.task('serve', ['styles', 'elements', 'images', 'markdown'], function () {
   browserSync({
     notify: false,
     logPrefix: 'PSK',
@@ -208,6 +217,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
   gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
   gulp.watch(['app/{scripts,elements}/**/*.js'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
+  gulp.watch(['app/docs/**/*.md'],['markdown']);
 });
 
 // Build and serve the output from the dist build
@@ -238,7 +248,7 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize',
+    'vulcanize', 'precache', 'markdown',
     cb);
     // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });

@@ -6,9 +6,9 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:400,300);
 body {
-  background: #fafafa;
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #fff;
+  font-family: 'Comfortaa', cursive;
   color: #333;
 }

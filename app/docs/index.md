@@ -1,0 +1,1 @@
+**Extremus-IO** is a is a project intended to make IOT simple. It aims at making any hardware virtually present inside your server. in that way, people can code to their device in the same way they did till now, but still have it run on a remote place.  
