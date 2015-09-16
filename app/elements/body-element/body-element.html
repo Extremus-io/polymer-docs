@@ -46,14 +46,13 @@
       },
       fulltarget: function(target){
         if (target==null){
-          target=index;
+          target='index';
         }
         return this.prefix+target+this.postfix;
       },
       dataResponse: function(e){
         this.$.mainContainer.innerHTML= e.detail.response;
         var elements = this.$.mainContainer.getElementsByTagName('pre');
-        console.log("highlighting code");
         for(var i=0;i<elements.length;i++){
           hljs.highlightBlock(elements[i]);
         }
