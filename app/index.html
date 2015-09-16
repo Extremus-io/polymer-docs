@@ -72,21 +72,20 @@
         <!-- Drawer Content -->
         <section class="drawer-content flex">
         <paper-menu class="list" attr-for-selected="data-route" on-iron-select="onMenuSelect" selected="{{route}}">
-          <a is="paper-item" data-route="index" href="/">
+          <a is='paper-item' data-route="index" href="/index">
             <iron-icon icon="home"></iron-icon>
             <span>Introduction</span>
           </a>
-          <paper-submenu>
-            <paper-item class="menu-trigger paper-item" >
-              <iron-icon icon="info"></iron-icon>
-              <span>DjWebsockets</span>
-            </paper-item>
-            <paper-menu class="menu-content" attr-for-selected="data-route">
-              <a data-route="/djwebsockets/introduction" href="/djwebsockets/introduction">Introduction</a>
-              <a data-route="/djwebsockets/installation" href="/djwebsockets/installation">Installation</a>
-              <a data-route="/djwebsockets/usage" href="/djwebsockets/usage">usage</a>
-            </paper-menu>
-          </paper-submenu>
+          <a is='paper-item' data-route="installation" href="/installation">
+            <iron-icon icon="get-app"></iron-icon>
+            <span>Installation</span>
+          </a>
+          <a is='paper-item' data-route="usage" href="/usage">
+            <iron-icon icon="verified-user"></iron-icon>
+            <span>Usage</span>
+          </a>
+
+
         </paper-menu>
         </section>
       </paper-scroll-header-panel>

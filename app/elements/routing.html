@@ -19,8 +19,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route='index';
     });
 
-    page('/:app/:route', function (data) {
-      app.route = data.params.app+'/'+data.params.route;
+    page('/:route', function (data) {
+      app.route = data.params.route;
     });
 
 //     add #! before urls

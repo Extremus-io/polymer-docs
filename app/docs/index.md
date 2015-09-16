@@ -1,1 +1,8 @@
-**Extremus-IO** is a is a project intended to make IOT simple. It aims at making any hardware virtually present inside your server. in that way, people can code to their device in the same way they did till now, but still have it run on a remote place.  
+# djwebsockets
+The library adds websocket support to django. It gives event driven websocket control for convenience of http programmers.
+
+
+The idea is to create a separate websocket server when an instance of django wsgi application instance is produced. and kill it as soon as the instance dies.
+
+##### Note:
+> Requires python 3.4 to work
