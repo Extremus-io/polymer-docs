@@ -109,11 +109,11 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  var scripts = gulp.src(['app/scripts/*','!app/scripts/*.js'])
+  var scripts = gulp.src(['app/scripts/unsupported'])
     .pipe(gulp.dest('dist/scripts'));
 
-  var uScripts = gulp.src(['app/scripts/**/*.js'])
-    .pipe(gulp.dest('dist/scripts'));
+  var uScripts = gulp.src(['app/scripts/unsupported/*.js'])
+    .pipe(gulp.dest('dist/scripts/unsupported'));
 
   return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox, scripts, uScripts)
     .pipe($.size({title: 'copy'}));
