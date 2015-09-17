@@ -93,7 +93,7 @@ gulp.task('copy', function () {
   }).pipe(gulp.dest('dist'));
 
   var bower = gulp.src([
-    'bower_components/**/*'
+    'bower_components/**/webcomponents-lite.js'
   ]).pipe(gulp.dest('dist/bower_components'));
 
 
