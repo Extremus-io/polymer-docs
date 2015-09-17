@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Djwebsockets is a package which adds event driven websocket support to django. based on 'websockets' python package. Also adds support to middleware.">
+  <meta name="description"
+        content="Djwebsockets is a package which adds event driven websocket support to django. based on 'websockets' python package. Also adds support to middleware.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="generator" content="Polymer Starter Kit" />
+  <meta name="generator" content="Polymer Starter Kit"/>
   <title>Djwebsockets</title>
   <!-- Place favicon.ico in the `app/` directory -->
   <!-- Chrome for Android theme color -->
@@ -38,39 +39,29 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
 
+
   <!-- will be replaced with elements/elements.vulcanized.html -->
   <link rel="import" href="elements/elements.html">
   <!-- endreplace-->
-
-  <style is="custom-style">
-    paper-scroll-header-panel.mainContainer{
-    --paper-scroll-header-panel-full-header: {
-    background-image: url(images/django-header-bg.png);
-    background-position: center center
-    };
-    --paper-scroll-header-panel-condensed-header:{
-    background-color:var(--dark-primary-color);
-    };
-  </style>
 </head>
 
 <body unresolved class="fullbleed layout vertical">
 <script src="scripts/unsupported/highlight.pack.js"></script>
 
-  <span id="browser-sync-binding"></span>
-  <template is="dom-bind" id="app">
+<span id="browser-sync-binding"></span>
+<template is="dom-bind" id="app">
 
-    <paper-drawer-panel id="paperDrawerPanel">
-      <!-- Drawer Scroll Header Panel -->
-      <paper-scroll-header-panel drawer fixed class="drawer">
+  <paper-drawer-panel id="paperDrawerPanel" responsive-width="900px">
+    <!-- Drawer Scroll Header Panel -->
+    <paper-scroll-header-panel drawer fixed class="drawer">
 
-        <!-- Drawer Toolbar -->
-        <paper-toolbar id="drawerToolbar">
-          <span class="paper-font-title">Menu</span>
-        </paper-toolbar>
+      <!-- Drawer Toolbar -->
+      <paper-toolbar id="drawerToolbar">
+        <span class="paper-font-title">Menu</span>
+      </paper-toolbar>
 
-        <!-- Drawer Content -->
-        <section class="drawer-content flex">
+      <!-- Drawer Content -->
+      <section class="drawer-content flex">
         <paper-menu class="list" attr-for-selected="data-route" on-iron-select="onMenuSelect" selected="{{route}}">
           <a is='paper-item' data-route="index" href="/index">
             <iron-icon icon="home"></iron-icon>
@@ -87,55 +78,50 @@
 
 
         </paper-menu>
-        </section>
-      </paper-scroll-header-panel>
+      </section>
+    </paper-scroll-header-panel>
 
-      <!-- Main Area -->
-      <paper-scroll-header-panel main condenses keep-condensed-header class="mainContainer" >
+    <!-- Main Area -->
+    <paper-scroll-header-panel main condenses keep-condensed-header class="mainContainer">
 
-        <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar" class="tall">
-          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-          <span class="flex"></span>
+      <!-- Main Toolbar -->
+      <paper-toolbar id="mainToolbar" class="tall">
+        <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+        <span class="flex"></span>
 
-          <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
+        <!-- Toolbar icons -->
 
-          <!-- Application name -->
-          <div class="middle middle-container center horizontal layout">
-            <div class="app-name">DjWebsockets</div>
-          </div>
 
-          <!-- Application sub title -->
-          <div class="bottom bottom-container center horizontal layout">
-            <div class="bottom-title paper-font-subhead">Evented websocket support for django</div>
-          </div>
-        </paper-toolbar>
-        <body-element prefix="docs/" postfix=".html" target="{{route}}"></body-element>
-      </paper-scroll-header-panel>
-    </paper-drawer-panel>
+        <!-- Application name -->
+        <div class="middle middle-container center horizontal layout">
+          <div class="app-name">DjWebsockets</div>
+        </div>
 
-     <!--Uncomment next block to enable Service Worker support (1/2) -->
-    <paper-toast id="caching-complete"
-                 duration="6000"
-                 text="Caching complete! This app will work offline.">
-    </paper-toast>
+        <!-- Application sub title -->
+        <div class="bottom bottom-container center horizontal layout">
+          <div class="bottom-title paper-font-subhead">Evented websocket support for django</div>
+        </div>
+      </paper-toolbar>
+      <body-element prefix="docs/" postfix=".html" target="{{route}}"></body-element>
+    </paper-scroll-header-panel>
+  </paper-drawer-panel>
 
-    <platinum-sw-register auto-register
-                          clients-claim
-                          skip-waiting
-                          on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="networkFirst"
-                         precache-file="precache.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
+  <!--Uncomment next block to enable Service Worker support (1/2) -->
+  <!--<paper-toast id="caching-complete"
+               duration="6000"
+               text="Caching complete! This app will work offline.">
+  </paper-toast>
+  <platinum-sw-register clients-claim
+                        skip-waiting
+                        on-service-worker-installed="displayInstalledToast">
+    <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json"></platinum-sw-cache>
+  </platinum-sw-register>-->
 
-  </template>
+</template>
 
-  <!-- build:js scripts/app.js -->
-  <script src="scripts/app.js"></script>
-  <!-- endbuild-->
+<!-- build:js scripts/app.js -->
+<script src="scripts/app.js"></script>
+<!-- endbuild-->
 </body>
 
 </html>

@@ -28,16 +28,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', function() {
     // imports are loaded and elements have been registered
+
+    app.onMenuSelect = function() {
+      // Close drawer after menu item is selected if drawerPanel is narrow
+
+      var drawerPanel = document.querySelector('#paperDrawerPanel');
+      if (drawerPanel.narrow) {
+        drawerPanel.closeDrawer();
+      }
+    };
   });
-
-  // Close drawer after menu item is selected if drawerPanel is narrow
-  app.onMenuSelect = function() {
-    var drawerPanel = document.querySelector('#paperDrawerPanel');
-    if (drawerPanel.narrow) {
-      drawerPanel.closeDrawer();
-    }
+  app.onMenuSelect= function() {
+    console.log('immature call to menuselect');
   };
-
 
 })(document);
 

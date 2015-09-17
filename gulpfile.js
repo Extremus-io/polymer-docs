@@ -96,11 +96,12 @@ gulp.task('copy', function () {
     'bower_components/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
+
   var elements = gulp.src(['app/elements/**/*.{html,js}'])
     .pipe(gulp.dest('dist/elements'));
 
-  var swBootstrap = gulp.src(['bower_components/platinum-sw/bootstrap/*.js'])
-    .pipe(gulp.dest('dist/elements/bootstrap'));
+  var swBootstrap = gulp.src(['bower_components/platinum-sw/**/*.js'])
+    .pipe(gulp.dest('dist/elements/')).pipe(gulp.dest('.tmp/elements/'));
 
   var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
     .pipe(gulp.dest('dist/sw-toolbox'));
@@ -161,7 +162,7 @@ gulp.task('vulcanize', function () {
       stripComments: true,
       inlineCss: true,
       inlineScripts: true,
-      excludes:['dist/elements/body-element/']
+      excludes:['dist/elements/body-element/','bower_components/polymer/','bower_components/platinum-sw/']
     }))
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: 'vulcanize'}));
@@ -182,6 +183,7 @@ gulp.task('precache', function (callback) {
     }
   });
 });
+
 
 // Clean Output Directory
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
@@ -255,7 +257,7 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize', 'precache', 'markdown',
+    'vulcanize', 'markdown',
     cb);
     // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });
