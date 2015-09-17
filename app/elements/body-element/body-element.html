@@ -6,6 +6,11 @@
       box-sizing:border-box;
       font-family: var(--primary-font-family);
     }
+    #loading{
+      position:absolute;
+      display:block;
+      left:calc(50% - 14px);
+    }
   </style>
   <link href="github.css" rel="stylesheet"/>
   <link href="styles/github-gist.css" rel="stylesheet"/>
@@ -15,8 +20,10 @@
       url="{{fulltarget(target)}}"
       handle-as="text"
       on-response="dataResponse"
-      id = "ajax">
+      id = "ajax"
+      >
     </iron-ajax>
+    <paper-spinner id ="loading"></paper-spinner>
     <section id="mainContainer" class="markdown-body">Loading...</section>
   </template>
   <script  src="../../scripts/unsupported/highlight.pack.js"></script>
@@ -42,7 +49,8 @@
           type: String,
           value: '',
           reflectToAttribute: true
-        }
+        },
+        status: Object
       },
       fulltarget: function(target){
         if (target==null){
@@ -52,6 +60,7 @@
       },
       dataResponse: function(e){
         this.$.mainContainer.innerHTML= e.detail.response;
+        this.$.loading.active=false;
         var elements = this.$.mainContainer.getElementsByTagName('pre');
         for(var i=0;i<elements.length;i++){
           hljs.highlightBlock(elements[i]);
@@ -59,14 +68,17 @@
       },
       update: function(){
         var ajax = this.$.ajax;
+        var loading = this.$.loading;
         ajax.url=this.fulltarget(this.target);
         ajax.generateRequest();
+        loading.active=true;
       },
       refresh:function(e) {
         this.update();
       },
       attached: function() {
         this.update();
+        this.$.loading.active=true;
         this.addEventListener('target-changed',this.refresh);
         hljs.configure({
           languages:['python', 'django', 'javascript']
