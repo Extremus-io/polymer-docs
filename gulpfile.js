@@ -96,6 +96,8 @@ gulp.task('copy', function () {
     'bower_components/**/webcomponents-lite.js'
   ]).pipe(gulp.dest('dist/bower_components'));
 
+  var icons = gulp.src(['app/images/touch/*'])
+    .pipe(gulp.dest('dist/images/touch'));
 
   var elements = gulp.src(['app/elements/**/*.{html,js}'])
     .pipe(gulp.dest('dist/elements'));
@@ -116,7 +118,7 @@ gulp.task('copy', function () {
   var uScripts = gulp.src(['app/scripts/unsupported/*.js'])
     .pipe(gulp.dest('dist/scripts/unsupported'));
 
-  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox, scripts, uScripts)
+  return merge(icons,  app, bower, elements, vulcanized, swBootstrap, swToolbox, scripts, uScripts)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -162,7 +164,7 @@ gulp.task('vulcanize', function () {
       stripComments: true,
       inlineCss: true,
       inlineScripts: true,
-      excludes:['dist/elements/body-element/','bower_components/polymer/','bower_components/platinum-sw/']
+      excludes:['dist/elements/body-element/']
     }))
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: 'vulcanize'}));
