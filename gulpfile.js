@@ -113,10 +113,13 @@ gulp.task('copy', function () {
     .pipe(gulp.dest('dist/elements'));
 
   var scripts = gulp.src(['app/scripts/unsupported'])
-    .pipe(gulp.dest('dist/scripts/'));
+    .pipe(gulp.dest('dist/scripts'));
 
   var uScripts = gulp.src(['app/elements/body-element/**/*.js'])
     .pipe(gulp.dest('dist/elements/body-element'));
+
+  var docs = gulp.src(['app/docs/**/*.json'])
+    .pipe(gulp.dest('dist/docs'));
 
   return merge(icons,  app, bower, elements, vulcanized, swBootstrap, swToolbox, scripts, uScripts)
     .pipe($.size({title: 'copy'}));

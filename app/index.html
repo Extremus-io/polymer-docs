@@ -109,7 +109,7 @@
           <paper-dropdown-menu label="Version" no-label-float>
             <paper-menu class="dropdown-content" attr-for-selected="version" selected={{version}}>
               <template is="dom-repeat" items="{{versions}}">
-                <paper-item version="{{item}}" selected="{{?index==1}}">{{item}}</paper-item>
+                <a is="paper-item" version$="{{item.version}}" href="{{item.href}}">{{item.version}}</a>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
@@ -128,7 +128,7 @@
           <div class="bottom-title paper-font-subhead">Evented websocket support for django</div>
         </div>
       </paper-toolbar>
-      <body-element prefix="docs/" postfix=".html" target="{{route}}"></body-element>
+      <body-element prefix="docs" postfix=".html" target="{{route}}"></body-element>
     </paper-scroll-header-panel>
   </paper-drawer-panel>
 

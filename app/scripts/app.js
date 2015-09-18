@@ -31,20 +31,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // imports are loaded and elements have been registered
     app.onMenuSelect = function() {
       // Close drawer after menu item is selected if drawerPanel is narrow
-
       var drawerPanel = document.querySelector('#paperDrawerPanel');
       if (drawerPanel.narrow) {
         drawerPanel.closeDrawer();
       }
     };
+    /*jshint ignore:start*/
+    app.versionsMenuUpdated=function(){
+      if (app.version==null)
+      {
+        app.version=app.versions[0].version;
+        page.show("/"+app.version);
+      }
+    };
+    /*jshint ignore:end*/
   });
   app.onMenuSelect= function() {
     console.log('App still being prepared');
   };
 
-  app.versionsMenuUpdated=function(){
-    app.version=app.versions[0];
-  };
 
 })(document);
 
