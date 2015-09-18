@@ -62,20 +62,36 @@
       <!-- Drawer Content -->
       <section class="drawer-content flex">
         <paper-menu class="list" attr-for-selected="data-route" on-iron-select="onMenuSelect" selected="{{route}}">
-          <a is='paper-item' data-route="index" href="/index">
-            <iron-icon icon="home"></iron-icon>
-            <span>Introduction</span>
-          </a>
-          <a is='paper-item' data-route="installation" href="/installation">
-            <iron-icon icon="get-app"></iron-icon>
-            <span>Installation</span>
-          </a>
-          <a is='paper-item' data-route="usage" href="/usage">
-            <iron-icon icon="verified-user"></iron-icon>
-            <span>Usage</span>
-          </a>
-
-
+          <dom-module id="menu-ajax">
+            <template>
+              <iron-ajax url="{{getMenuUrl(version)}}" auto last-response="{{response}}"></iron-ajax>
+            </template>
+            <script>
+              Polymer({
+                is: "menu-ajax",
+                properties:{
+                  version:{
+                    type:String,
+                    notify:true
+                  },
+                  response:{
+                    type:Object,
+                    notify:true
+                  }
+                },
+                getMenuUrl: function(version){
+                  return "docs/"+version+"/menu.json"
+                }
+              });
+            </script>
+          </dom-module>
+          <menu-ajax version="{{version}}" response="{{versionMenu}}"></menu-ajax>
+          <template is="dom-repeat" items="{{versionMenu}}">
+            <a is="paper-item" data-route$='{{item.href}}' href="{{item.href}}">
+              <iron-icon icon="{{item.icon}}"></iron-icon>
+              <span>{{item.title}}</span>
+            </a>
+          </template>
         </paper-menu>
       </section>
     </paper-scroll-header-panel>
@@ -87,6 +103,17 @@
       <paper-toolbar id="mainToolbar" class="tall">
         <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
         <span class="flex"></span>
+        <iron-ajax url="docs/versions.json" last-response="{{versions}}" auto on-response="versionsMenuUpdated">
+        </iron-ajax>
+        <paper-material elevation="1" class="version-menu">
+          <paper-dropdown-menu label="Version" no-label-float>
+            <paper-menu class="dropdown-content" attr-for-selected="version" selected={{version}}>
+              <template is="dom-repeat" items="{{versions}}">
+                <paper-item version="{{item}}" selected="{{?index==1}}">{{item}}</paper-item>
+              </template>
+            </paper-menu>
+          </paper-dropdown-menu>
+        </paper-material>
 
         <!-- Toolbar icons -->
 

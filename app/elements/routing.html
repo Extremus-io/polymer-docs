@@ -23,12 +23,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 //      app.route='index';
     });
     page('/',function(){
-      app.route='index';
+      app.route='/v0.7/index';
     });
 
 
-    page('/:route', function (data) {
-      app.route = data.params.route;
+    page('/:version/:route', function (data) {
+      app.version = data.params.version;
+      app.route = app.version+'/'+data.params.route;
     });
 
 //     add #! before urls
